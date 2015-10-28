@@ -1,0 +1,24 @@
+
+:css
+  table tr:nth-child(odd) {background-color: #DDDDDD; }
+
+%table
+  %th id
+  %th make
+  %th mmodel
+  %th yr
+  %th color
+  %th vin
+  %th owner
+  %th created_at
+  -@cars.each do |car|
+    %tr
+      %td=car.id
+      %td=car.make
+      %td=car.mmodel
+      %td=car.yr
+      %td=car.color
+      %td=car.vin
+      %td=car.owner
+      %td=car.created_at
+

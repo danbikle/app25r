@@ -19,4 +19,12 @@ class WelcomeController < ApplicationController
     EOF
     render :json => @myjson
   end
+
+  def carjson
+    @cars = Car.all
+    render :json => @cars
+  end
+  def cars
+    @cars = Car.all
+  end
 end
