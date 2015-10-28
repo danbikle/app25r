@@ -35,4 +35,13 @@ class WelcomeController < ApplicationController
     @mycsv_a = CSV.parse(mycsv_s)
     render :json => @mycsv_a[1,9]
   end
+
+  def fbcsv
+    mycsv_s = open('http://real-chart.finance.yahoo.com/table.csv?s=FB') {|f| f.read }
+    @mycsv_a = CSV.parse(mycsv_s)
+    response.headers['Content-Type'] = 'text/csv'
+    response.headers['Content-Disposition'] = 'attachment; filename=fb.csv'    
+    render :text => @mycsv_a[1,9]
+  end
+
 end
