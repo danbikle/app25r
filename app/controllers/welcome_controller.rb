@@ -1,3 +1,5 @@
+require 'open-uri'
+require 'csv'
 class WelcomeController < ApplicationController
   def index
   end
@@ -26,5 +28,11 @@ class WelcomeController < ApplicationController
   end
   def cars
     @cars = Car.all
+  end
+
+  def fb
+    mycsv_s = open('http://real-chart.finance.yahoo.com/table.csv?s=FB') {|f| f.read }
+    @mycsv_a = CSV.parse(mycsv_s)
+    render :json => @mycsv_a[1,9]
   end
 end
