@@ -1,4 +1,4 @@
-make,model,yr,color,vin,owner
+make,mmodel,yr,color,vin,owner
 Ford,Mustang,1970,green,abc123,Fred
 Chevy,Nova,1971,blue,xyz321,Cheryl
 Dodge,Dart,1972,red,mnp777,Dan
