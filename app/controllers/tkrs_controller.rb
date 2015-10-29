@@ -1,3 +1,5 @@
+require 'open-uri'
+require 'csv'
 class TkrsController < ApplicationController
   def data
     tkr      = params[:tkr]

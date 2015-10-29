@@ -12,13 +12,11 @@ This is a chart of
   var rows4chart = [];
   var rows       = '';
   var xval       = 0;
-  // d3.json
-  d3.xhr("/tkrs/data/#{params[:tkr]}", 'application/json', function(error, rows) {
+  d3.json("/tkrs/data/#{params[:tkr]}", 'application/json', function(error, json) {
     if (error) throw error;
-    rows_s        = rows.response;
-    var rows_json = JSON.parse(rows_s);
-    rows_json;
-    rows_json.forEach(function(row) {
+    rows = json;
+    rows;
+    rows.forEach(function(row) {
       rows4chart.push({x:xval,y:Number(row[4])});
       xval = xval + 1;
     });
