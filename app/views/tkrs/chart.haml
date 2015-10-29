@@ -3,28 +3,27 @@ This is a chart of
 =params[:tkr]
 
 %script(src="/d3.v3.min.js")
-%script(src="/d3.promise.js")
 %script(src="/rickshaw.min.js")
+%script(src="/jquery.min.js")
 
 / The div below, depends on rickshaw.min.js
 #my_rickshawchart
 
 :javascript
+
   var rows4chart = [];
   var rows       = [];
   var xval       = 0;
 
-  var promise = d3.promise.json("/tkrs/data/#{params[:tkr]}");
-  promise.then(function(json){
-    
+  d3.json("/tkrs/data/#{params[:tkr]}",function(error, json) {
+    if (error) throw error;
     rows = json;
     rows;
     rows.forEach(function(row) {
       rows4chart.push({x:xval,y:Number(row[4])});
       xval = xval + 1;
     });
-  }, function(error){if (error) throw error;});
-
+  });
 
   var graph = new Rickshaw.Graph( {
     renderer: 'scatterplot',
@@ -35,4 +34,11 @@ This is a chart of
       data: rows4chart
     }]
   });
-  graph.render();
+
+  jQuery(document).ready(function(){
+    setTimeout(function(){ 
+      graph.render();
+    }, 2000);  
+  });
+
+  
