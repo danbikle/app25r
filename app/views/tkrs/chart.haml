@@ -10,10 +10,15 @@ This is a chart of
 
 :javascript
   var rows4chart = [];
-  var xval = 0;
-  d3.json("/tkrs/data/#{params[:tkr]}", function(error, rows) {
+  var rows       = '';
+  var xval       = 0;
+  // d3.json
+  d3.xhr("/tkrs/data/#{params[:tkr]}", 'application/json', function(error, rows) {
     if (error) throw error;
-    rows.forEach(function(row) {
+    rows_s        = rows.response;
+    var rows_json = JSON.parse(rows_s);
+    rows_json;
+    rows_json.forEach(function(row) {
       rows4chart.push({x:xval,y:Number(row[4])});
       xval = xval + 1;
     });
