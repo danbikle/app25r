@@ -1,11 +1,23 @@
+
+%script(src="/d3.v3.min.js")
+%script(src="/rickshaw.min.js")
+
+:css
+  #a_spinner {
+    animation: blinker 1s linear infinite;
+  }
+  @keyframes blinker {  
+    50% { opacity: 0.0; }
+  }
+
 %h1 Chart
 This is a chart of
 =params[:tkr]
 
-%script(src="/d3.v3.min.js")
-%script(src="/rickshaw.min.js")
-%script(src="/jquery.min.js")
+%br/
+%br/
 
+#a_spinner
 / The div below, depends on rickshaw.min.js
 #my_rickshawchart
 
@@ -35,10 +47,9 @@ This is a chart of
     }]
   });
 
-  jQuery(document).ready(function(){
-    setTimeout(function(){ 
-      graph.render();
-    }, 2000);  
-  });
+  var mymsg = d3.select('#a_spinner').html('<h2>Loading...</h2><img src="/spinner.gif"></img>');
+  setTimeout(function(){
+    graph.render();
+    mymsg.remove();
+  },4000);
 
-  
