@@ -3,14 +3,29 @@ This is a chart of
 =params[:tkr]
 
 %script(src="/d3.v3.min.js")
+%script(src="/rickshaw.min.js")
+
+/ The div below, depends on rickshaw.min.js
+#my_rickshawchart
 
 :javascript
-  d3.json("/tkrs/data/IBM", function(error, rows) {
+  var rows4chart = [];
+  var xval = 0;
+  d3.json("/tkrs/data/#{params[:tkr]}", function(error, rows) {
     if (error) throw error;
-    var rows4chart = [];
     rows.forEach(function(row) {
-      rows4chart.push({'x':row[0]});
-      row;
+      rows4chart.push({x:xval,y:Number(row[4])});
+      xval = xval + 1;
     });
-    'bye';
   });
+
+  var graph = new Rickshaw.Graph( {
+    renderer: 'scatterplot',
+    width: 800, 
+    element: document.querySelector("#my_rickshawchart"), 
+    series: [{
+      color: 'steelblue',
+      data: rows4chart
+    }]
+  });
+  graph.render();

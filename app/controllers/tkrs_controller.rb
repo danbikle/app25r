@@ -3,6 +3,6 @@ class TkrsController < ApplicationController
     tkr      = params[:tkr]
     mycsv_s  = open("http://real-chart.finance.yahoo.com/table.csv?s=#{tkr}") {|f| f.read }
     @mycsv_a = CSV.parse(mycsv_s)
-    render :json => @mycsv_a[1,3]
+    render :json => @mycsv_a[1,9]
   end
 end
