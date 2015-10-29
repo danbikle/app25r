@@ -2,3 +2,9 @@
 This is a chart of
 =params[:tkr]
 
+%script(src="/d3.v3.min.js")
+
+:javascript
+  d3.json("/tkrs/data/IBM", function(error, root) {
+    if (error) throw error;
+  });
