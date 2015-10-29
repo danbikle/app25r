@@ -3,12 +3,8 @@
 %script(src="/rickshaw.min.js")
 
 :css
-  #a_spinner {
-    animation: blinker 1s linear infinite;
-  }
-  @keyframes blinker {  
-    50% { opacity: 0.0; }
-  }
+  #a_spinner {animation: blinker 1s linear infinite;}
+  @keyframes blinker {50% { opacity: 0.0; }}
 
 %h1 Chart
 This is a chart of
@@ -17,6 +13,7 @@ This is a chart of
 %br/
 %br/
 
+/ The div below, depends on d3.v3.min.js
 #a_spinner
 / The div below, depends on rickshaw.min.js
 #my_rickshawchart
