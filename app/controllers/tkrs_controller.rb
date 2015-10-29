@@ -5,6 +5,6 @@ class TkrsController < ApplicationController
     yrsp    = RestClient.get "http://real-chart.finance.yahoo.com/table.csv?s=#{tkr}"
     yrsp_s  = yrsp.to_s
     @mycsv_a = CSV.parse(yrsp_s)
-    render :json => @mycsv_a[1,9]
+    render :json => @mycsv_a[1,99]
   end
 end

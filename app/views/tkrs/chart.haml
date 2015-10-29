@@ -29,7 +29,9 @@ This is a chart of
     rows = json;
     rows;
     rows.forEach(function(row) {
-      rows4chart.push({x:xval,y:Number(row[4])});
+      var udate     = Date.parse(row[0]);
+      var cls_price =     Number(row[4]);
+      rows4chart.push({x:udate,y:cls_price});
       xval = xval + 1;
     });
   });
