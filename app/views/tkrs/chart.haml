@@ -19,10 +19,11 @@ This is a chart of
 #my_rickshawchart
 
 :javascript
-
-  var rows4chart = [];
-  var rows       = [];
-  var xval       = 0;
+  var mymsg = d3.select('#a_spinner').html('<h2>Loading...</h2><img src="/spinner.gif"></img>');
+  var rows4chart1 = [];
+  var rows4chart2 = [];
+  var rows        = [];
+  var xval        = 0;
 
   d3.json("/tkrs/data/#{params[:tkr]}",function(error, json) {
     if (error) throw error;
@@ -31,23 +32,22 @@ This is a chart of
     rows.forEach(function(row) {
       var udate     = Date.parse(row[0]);
       var cls_price =     Number(row[4]);
-      rows4chart.push({x:udate,y:cls_price});
+      rows4chart1.push({x:udate,y:cls_price});
       xval = xval + 1;
     });
   });
 
-  var graph = new Rickshaw.Graph( {
-    renderer: 'scatterplot',
-    width: 800, 
-    element: document.querySelector("#my_rickshawchart"), 
-    series: [{
-      color: 'steelblue',
-      data: rows4chart
-    }]
-  });
-
-  var mymsg = d3.select('#a_spinner').html('<h2>Loading...</h2><img src="/spinner.gif"></img>');
   setTimeout(function(){
+    rows4chart1.forEach(function(row){rows4chart2.push(rows4chart1.pop())});
+    var graph = new Rickshaw.Graph( {
+      renderer: 'scatterplot',
+      width: 800, 
+      element: document.querySelector("#my_rickshawchart"), 
+      series: [{
+        color: 'steelblue',
+        data: rows4chart2
+      }]
+    });
     graph.render();
     mymsg.remove();
   },4000);
