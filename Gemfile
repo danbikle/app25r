@@ -45,4 +45,5 @@ end
 
 gem 'haml-rails'
 gem 'thin'
-gem  'rest-client'
+gem 'rest-client'
+gem 'pg'
