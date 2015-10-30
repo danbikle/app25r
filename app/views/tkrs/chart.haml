@@ -23,22 +23,20 @@ This is a chart of
   var rows4chart1 = [];
   var rows4chart2 = [];
   var rows        = [];
-  var xval        = 0;
   var rowv        = {};
 
   d3.json("/tkrs/data/#{params[:tkr]}",function(error, json) {
     if (error) throw error;
     rows = json;
-    rows;
     rows.forEach(function(row) {
       var udate     = Date.parse(row[0]);
       var cls_price =     Number(row[4]);
       rows4chart1.push({x:udate,y:cls_price});
-      xval = xval + 1;
     });
   });
 
   setTimeout(function(){
+
     rows4chart1.forEach(function(row){
       rows4chart2.push({x:row.x,y:row.y});
     });
