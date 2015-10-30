@@ -25,12 +25,10 @@ This is a chart of
   var rows        = [];
   var rowv        = {};
 
-  d3.json("/tkrs/data/#{params[:tkr]}",function(error, json) {
-
-    setTimeout(function(){
+  d3.json("/tkrs/data/#{params[:tkr]}",function(error, rows) {
 
       if (error) throw error;
-      rows = json;
+      // rows = json;
 
       rows.forEach(function(row) {
         var udate     = Date.parse(row[0]);
@@ -53,6 +51,8 @@ This is a chart of
         rownum -= 1;
         rows4chart2.push(rows4chart1[rownum]);
       });
+
+    setTimeout(function(){
       graph.render();
       mymsg.remove();
 
