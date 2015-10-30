@@ -24,6 +24,7 @@ This is a chart of
   var rows4chart2 = [];
   var rows        = [];
   var xval        = 0;
+  var rowv        = {};
 
   d3.json("/tkrs/data/#{params[:tkr]}",function(error, json) {
     if (error) throw error;
@@ -38,7 +39,10 @@ This is a chart of
   });
 
   setTimeout(function(){
-    rows4chart1.forEach(function(row){rows4chart2.push(rows4chart1.pop())});
+    rows4chart1.forEach(function(row){
+      rows4chart2.push({x:row.x,y:row.y});
+    });
+
     var graph = new Rickshaw.Graph( {
       renderer: 'scatterplot',
       width: 800, 
