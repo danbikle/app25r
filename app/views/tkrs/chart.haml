@@ -37,8 +37,10 @@ This is a chart of
 
   setTimeout(function(){
 
+    var rownum = rows4chart1.length;
     rows4chart1.forEach(function(row){
-      rows4chart2.push({x:row.x,y:row.y});
+      rownum -= 1;
+      rows4chart2.push(rows4chart1(rownum));
     });
 
     var graph = new Rickshaw.Graph( {
