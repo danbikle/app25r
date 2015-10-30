@@ -1,5 +1,6 @@
 
 %link(href="/graph.css" rel="stylesheet" type="text/css")/
+%link(href="/detail.css" rel="stylesheet" type="text/css")/
 
 %script(src="/d3.v3.min.js")
 %script(src="/rickshaw.min.js")
@@ -47,12 +48,15 @@ This is a chart of
       width: 800, 
       element: document.querySelector("#my_rickshawchart"), 
       series: [{
+        name: "Closing Price",
         color: 'steelblue',
         data: rows4chart2
       }]
     });
     var xAxis = new Rickshaw.Graph.Axis.Time({graph: graph});
     var yAxis = new Rickshaw.Graph.Axis.Y({graph: graph});
+    var hoverDetail = new Rickshaw.Graph.HoverDetail( {graph: graph});
+
     // Give data some time to accumulate, then render:
     setTimeout(function(){
       graph.render();
