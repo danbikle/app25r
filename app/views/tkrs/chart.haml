@@ -28,38 +28,34 @@ This is a chart of
   var rowv        = {};
 
   d3.json("/tkrs/data/#{params[:tkr]}",function(error, rows) {
+    if (error) throw error;
+    rows.forEach(function(row) {
+      var udate     = Date.parse(row[0])/1000;
+      var cls_price =     Number(row[4]);
+      rows4chart1.push({x:udate,y:cls_price});
+    });
 
-      if (error) throw error;
+    // Reorder rows so I have oldest first.
+    var rownum = rows4chart1.length;
+    rows4chart1.forEach(function(){
+      rownum -= 1;
+      rows4chart2.push(rows4chart1[rownum]);
+    });
 
-      rows.forEach(function(row) {
-        var udate     = Date.parse(row[0])/1000;
-        var cls_price =     Number(row[4]);
-        rows4chart1.push({x:udate,y:cls_price});
-      });
-
-      var graph = new Rickshaw.Graph( {
-        renderer: 'scatterplot',
-        width: 800, 
-        element: document.querySelector("#my_rickshawchart"), 
-        series: [{
-          color: 'steelblue',
-          data: rows4chart2
-        }]
-      });
-      var xAxis = new Rickshaw.Graph.Axis.Time({
-          graph: graph
-      });
-
-      // Reorder rows so I have oldest first.
-      var rownum = rows4chart1.length;
-      rows4chart1.forEach(function(){
-        rownum -= 1;
-        rows4chart2.push(rows4chart1[rownum]);
-      });
-
+    var graph = new Rickshaw.Graph( {
+      renderer: 'scatterplot',
+      width: 800, 
+      element: document.querySelector("#my_rickshawchart"), 
+      series: [{
+        color: 'steelblue',
+        data: rows4chart2
+      }]
+    });
+    var xAxis = new Rickshaw.Graph.Axis.Time({graph: graph});
+    var yAxis = new Rickshaw.Graph.Axis.Y({graph: graph});
+    // Give data some time to accumulate, then render:
     setTimeout(function(){
       graph.render();
       mymsg.remove();
     },4000);
-
   });
