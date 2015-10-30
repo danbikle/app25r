@@ -1,4 +1,6 @@
 
+%link(href="/graph.css" rel="stylesheet" type="text/css")/
+
 %script(src="/d3.v3.min.js")
 %script(src="/rickshaw.min.js")
 
@@ -30,7 +32,7 @@ This is a chart of
       if (error) throw error;
 
       rows.forEach(function(row) {
-        var udate     = Date.parse(row[0]);
+        var udate     = Date.parse(row[0])/1000;
         var cls_price =     Number(row[4]);
         rows4chart1.push({x:udate,y:cls_price});
       });
@@ -43,6 +45,9 @@ This is a chart of
           color: 'steelblue',
           data: rows4chart2
         }]
+      });
+      var xAxis = new Rickshaw.Graph.Axis.Time({
+          graph: graph
       });
 
       // Reorder rows so I have oldest first.
