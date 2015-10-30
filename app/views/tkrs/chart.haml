@@ -28,7 +28,6 @@ This is a chart of
   d3.json("/tkrs/data/#{params[:tkr]}",function(error, rows) {
 
       if (error) throw error;
-      // rows = json;
 
       rows.forEach(function(row) {
         var udate     = Date.parse(row[0]);
@@ -46,8 +45,9 @@ This is a chart of
         }]
       });
 
+      // Reorder rows so I have oldest first.
       var rownum = rows4chart1.length;
-      rows4chart1.forEach(function(row){
+      rows4chart1.forEach(function(){
         rownum -= 1;
         rows4chart2.push(rows4chart1[rownum]);
       });
@@ -55,7 +55,6 @@ This is a chart of
     setTimeout(function(){
       graph.render();
       mymsg.remove();
-
     },4000);
 
   });
