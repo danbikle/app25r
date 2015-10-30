@@ -43,18 +43,33 @@ This is a chart of
       rows4chart2.push(rows4chart1[rownum]);
     });
 
+    // I should get the min/max value of the price to help draw the chart:
+    var chartmin = rows4chart1[0].cls_price;
+    var chartmax = rows4chart1[0].cls_price;
+    rows4chart1.forEach(function(row){
+      if (chartmin > row.cls_price) chartmin = row.cls_price;
+      if (chartmax < row.cls_price) chartmax = row.cls_price;
+    });
+    chartmin = 0.8 * chartmin;
+    chartmax = 1.2 * chartmax;
+
     var graph = new Rickshaw.Graph( {
       renderer: 'scatterplot',
       width: 800, 
+      height: 400, 
+      min: chartmin,
+      max: chartmax,
       element: document.querySelector("#my_rickshawchart"), 
       series: [{
-        name: "Closing Price",
+        name: "p",
         color: 'steelblue',
         data: rows4chart2
       }]
     });
     var xAxis = new Rickshaw.Graph.Axis.Time({graph: graph});
-    var yAxis = new Rickshaw.Graph.Axis.Y({graph: graph});
+    var yAxis = new Rickshaw.Graph.Axis.Y({
+      graph: graph,
+    });
     var hoverDetail = new Rickshaw.Graph.HoverDetail( {graph: graph});
 
     // Give data some time to accumulate, then render:
