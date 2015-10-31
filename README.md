@@ -38,13 +38,13 @@ apt-get update
 apt-get upgrade
 ```
 I created ann account:
-
+```
 useradd ann -m -s /bin/bash
 passwd ann
 ssh -YA ann@localhost
-
+```
 I installed Node.js:
-
+```
 cd ~ann
 wget https://nodejs.org/dist/v4.2.1/node-v4.2.1-linux-x64.tar.gz
 tar zxf node-v4.2.1-linux-x64.tar.gz
@@ -59,9 +59,9 @@ npm install -g coffee-script
 ls -la /home/ann/node/lib/node_modules/
 which coffee
 coffee -e 'console.log "hello coffee!"'
-
+```
 I installed app25r:
-
+```
 cd ~ann
 rm -rf app25r
 git clone https://github.com/danbikle/app25r.git
@@ -74,43 +74,43 @@ $GEM_HOME/bin/bundle install
 ~ann/app25r/bin/rails r ~ann/app25r/db/csv2cars.rb
 ~ann/app25r/bin/rails s -p 3325
 /usr/bin/curl localhost:3325|head
-
+```
 I deployed it to heroku.com
-
+```
 cd ~ann
 wget https://s3.amazonaws.com/assets.heroku.com/heroku-client/heroku-client.tgz
 tar zxf heroku-client.tgz
 echo 'export PATH=/home/ann/heroku-client/bin:${PATH}' >> ~ann/.bashrc
 echo  export PATH=/home/ann/heroku-client/bin:${PATH}
-
+```
 I created ssh-key for ann account (assuming ann has none yet).
 
 I used heroku-client to "login" my shell.
 
 I gave a copy of ann public ssh-key to heroku:
-
+```
 ~ann/heroku-client/bin/heroku status
 ~ann/heroku-client/bin/heroku auth:login
 ~ann/heroku-client/bin/heroku auth:whoami
 ~ann/heroku-client/bin/heroku keys:add
-    
+``` 
 I used heroku-client to create a blank app named rails411 at herokuapp.com
-
+```
 cd ~ann/app25r
 ~ann/heroku-client/bin/heroku create rails411
-    
+``` 
 I git-pushed ~ann/app25r to heroku:
-
+```
 cd ~ann/app25r
 git add .
 git commit -am Hi_rails
 git push heroku master
-    
+``` 
 Setup the database on heroku for my Rails app there:
-
+```
 ~ann/heroku-client/bin/heroku run rake db:migrate
 ~ann/heroku-client/bin/heroku run bin/rails r db/csv2cars.rb
-    
+``` 
 I saw ~ann/app25r deployed at 
 
 https://rails411.herokuapp.com
