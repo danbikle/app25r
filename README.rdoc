@@ -24,7 +24,7 @@ http://www.google.com/search?q=How+to+install+virtualbox+additions
 http://www.syntax.us/posts/virtualbox_why_tiny
 
 After I installed Ubuntu I enhanced it:
-
+```
 apt-get update
 apt-get upgrade
 
@@ -36,7 +36,7 @@ ruby ruby-dev sqlite3
 
 apt-get update
 apt-get upgrade
-
+```
 I created ann account:
 
 useradd ann -m -s /bin/bash
