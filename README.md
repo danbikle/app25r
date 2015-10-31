@@ -64,6 +64,7 @@ coffee -e 'console.log "hello coffee!"'
 I installed app25r:
 ```
 cd ~ann
+echo 'gem: --no-ri --no-rdoc' >> ~ann/.gemrc
 rm -rf app25r
 git clone https://github.com/danbikle/app25r.git
 cd ~ann/app25r
