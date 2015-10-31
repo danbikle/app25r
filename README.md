@@ -1,4 +1,5 @@
-== README
+README
+======
 
 This Rails App is educational content for a Meetup:
 
@@ -116,4 +117,5 @@ I saw ~ann/app25r deployed at
 https://rails411.herokuapp.com
 
 You have questions?
+
 e-me: bikle101 at gmail
